@@ -1,0 +1,15 @@
+form {
+  width: 1800px;
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  gap: 15px;
+  .order-info-inputs {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    .input {
+      cursor: pointer;
+    }
+  }
+}

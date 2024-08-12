@@ -1,0 +1,13 @@
+.navigation {
+  width: 1800px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  font-size: 30px;
+  &-menu {
+    display: flex;
+    gap: 15px;
+    list-style-type: none;
+  }
+}
