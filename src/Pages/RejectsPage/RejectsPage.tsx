@@ -1,7 +1,7 @@
-import React from "react";
+import AddRejectOrderComponent from "../../components/AddRejectOrder/AddRejectOrderComponent";
 
-function RejectsPage() {
-  return <></>;
+function ReturnsPage() {
+  return <AddRejectOrderComponent></AddRejectOrderComponent>;
 }
 
-export default RejectsPage;
+export default ReturnsPage;

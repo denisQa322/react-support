@@ -1,8 +1,6 @@
-import React from "react";
 import logo from "../../assets/images/support-main-icon.png";
 import { Link } from "react-router-dom";
 import "./MainPage.scss";
-import OrderInfo from "../../components/OrderInfo/OrdersInfo";
 
 function MainPage() {
   return (
@@ -21,7 +19,6 @@ function MainPage() {
         <br />а также информацию об <Link to="/rejects">отказах</Link> от
         заказов.
       </p>
-      <OrderInfo />
     </section>
   );
 }

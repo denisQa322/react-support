@@ -1,19 +1,34 @@
-import React from "react";
+
+import { NavLink } from "react-router-dom";
 import "./NavBar.scss";
-import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
     <nav className="navigation">
       <ul className="navigation-menu">
         <li className="navigation-menu-item">
-          <Link to="/">Главная</Link>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Главная
+          </NavLink>
         </li>
         <li className="navigation-menu-item">
-          <Link to="/returns">Возвраты</Link>
+          <NavLink
+            to="/returns"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Возвраты
+          </NavLink>
         </li>
         <li className="navigation-menu-item">
-          <Link to="/rejects">Отказы</Link>
+          <NavLink
+            to="/rejects"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Отказы
+          </NavLink>
         </li>
       </ul>
     </nav>
