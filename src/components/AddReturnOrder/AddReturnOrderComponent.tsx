@@ -19,6 +19,7 @@ import { makeStyles } from "@mui/styles";
 import Buttons from "../Buttons/Buttons";
 
 interface ReturnOrder {
+  status: boolean;
   reference: string;
   quantity: string;
   date: string;
@@ -36,7 +37,6 @@ const useStyles = makeStyles({
     fontWeight: "bold !important",
     color: "#1976d2 !important",
     fontSize: "20px !important",
-    border: "1px solid black",
   },
   tableRow: {
     "&:nth-of-type(odd)": {
@@ -56,6 +56,8 @@ function AddReturnOrderComponent() {
   const [returnReason, setReturnReason] = useState<string>("");
 
   const [orders, setOrders] = useState<ReturnOrder[]>([]);
+
+  const [status, setStatus] = useState<boolean>(false);
 
   // Загрузка данных из localStorage
   useEffect(() => {
@@ -79,6 +81,7 @@ function AddReturnOrderComponent() {
     }
 
     const newOrder: ReturnOrder = {
+      status,
       reference,
       quantity,
       date,
@@ -88,6 +91,7 @@ function AddReturnOrderComponent() {
 
     setOrders((prevOrders) => {
       const updatedOrders = [...prevOrders, newOrder];
+      newOrder.status = true;
       console.log("Добавляем новый заказ:", newOrder);
       return updatedOrders;
     });
@@ -97,6 +101,7 @@ function AddReturnOrderComponent() {
     setDate(new Date().toISOString().split("T")[0]);
     setSeller("");
     setReturnReason("");
+    setStatus(false);
   };
 
   return (
@@ -115,11 +120,12 @@ function AddReturnOrderComponent() {
         <AddButton onAdd={handleAddReturnOrder} />
       </div>
 
-      {orders.length > 0 && (
+      {orders.length > 0 && orders.some((order) => order.status) && (
         <TableContainer component={Paper} className={styles.tableContainer}>
           <Table>
             <TableHead>
               <TableRow>
+                <TableCell className={styles.tableHeadCell}>Статус</TableCell>
                 <TableCell className={styles.tableHeadCell}>Референс</TableCell>
                 <TableCell className={styles.tableHeadCell}>
                   Количество
@@ -137,6 +143,9 @@ function AddReturnOrderComponent() {
             <TableBody>
               {orders.map((order, index) => (
                 <TableRow key={index} className={styles.tableRow}>
+                  <TableCell className="returnStatus">
+                    {order.status ? "Активный" : "Завершен"}
+                  </TableCell>
                   <TableCell className="tableReference">
                     {order.reference}
                   </TableCell>
@@ -157,6 +166,14 @@ function AddReturnOrderComponent() {
           </Table>
         </TableContainer>
       )}
+      <button
+        onClick={() => {
+          window.localStorage.clear();
+          window.location.reload();
+        }}
+      >
+        clear LS
+      </button>
     </>
   );
 }
